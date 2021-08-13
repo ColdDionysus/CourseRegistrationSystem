@@ -66,10 +66,7 @@ public class Course{
 
     }
     
-    public static void main(String[] args){
     
-        new Course("123", "Nepali", 5);
-    }
 }
 
 
