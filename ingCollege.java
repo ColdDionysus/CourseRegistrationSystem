@@ -1,3 +1,11 @@
+/**
+ * Author: Pukar Gautam
+ * Version : 2.0
+ * GUI :: 
+ * GROUP : N1
+ * ID: 20049200
+ */
+//importing necessary gui packages
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -9,29 +17,32 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import javax.swing.border.*;
-
+//class INGCollege all the codes starts here
 public class INGCollege {
+    //arraylist of course list and data assignmetn
     ArrayList<Course> academicCourseList = new ArrayList<Course>();
     ArrayList<Course> nonAcademicCourseList = new ArrayList<Course>();
-    // Component of home
+    //GUI COMPONENTS STARRTS HERE
+    //COMPONENT OF HOME STARTS HERE
+    JFrame mainFrame;
     private JLabel welcomeText;
     private JLabel poweredby;
+    //COMPONENT OF HOME ENDS HERE
 
-    // Component of academic Course
+    //GUI COMPONENT OF ACADEMIC COURSE CLASS STARTS HERE
     private JLabel academicCourse;
-    // for adding starts here
     private JLabel courseId;
     private JLabel Duration;
     private JLabel courseName;
     private JLabel level;
     private JLabel credit;
     private JLabel numberOfAssessments;
-    // for adding stops here
+
     private JLabel courseLeader;
     private JLabel lecturerName;
     private JLabel startingDate;
     private JLabel completionDate;
-    // text field of academic class starts here
+
     private JTextField id;
     private JTextField lecturer;
     private JTextField dur;
@@ -43,24 +54,24 @@ public class INGCollege {
     private JTextField starting;
     private JTextField completion;
     private JTextField courseTxt;
-    // buttons of academic course class starts here
+
     private JButton Add;
     private JButton Register;
     private JButton NonAcademic;
     private JButton register;
     private JButton display;
     private  JButton clear;
-    // Components of academicCourse class ends here
-    // Components of nonacademic course class starts her
+    //GUI OF ACADEMICCOURSE CLASS ENDS HERE
+
+    //GUI OF NON ACADEMICCOURSE CLASS STARTS HERE
 
     private JLabel nonAcademicCourse;
-    // add buttton
+
     private JLabel courseId1;
     private JLabel Duration1;
     private JLabel courseName1;
     private JLabel preRequisite;
 
-    // regiter button
     private JLabel instructorName1;
     private JLabel startingDate1;
     private JLabel courseLeader1;
@@ -82,14 +93,14 @@ public class INGCollege {
     private JButton display1;
     private JButton clear1;
     private JButton remove;
-
+    //GUI COMPONENT OF NONACADEMIC COURSE CLASS ENDS HERH
     public INGCollege() {
-        
 
-        JFrame mainFrame = new JFrame("Course Registration");
+        //FRAME ADJUSTMENT HEART OF GUI
+        mainFrame = new JFrame("Course Registration");
         Image icon = Toolkit.getDefaultToolkit().getImage("./ing.png");
         mainFrame.setIconImage(icon);
-
+        //PANELS ADJUSTMENT AND SETUPS FOR ALL CLASSES
         JPanel fixPanel = new JPanel();
         fixPanel.setBounds(0, 0, 350, 900);
         fixPanel.setBackground(new Color(240, 255, 240));
@@ -115,7 +126,9 @@ public class INGCollege {
         nonAcademicPanel.setLayout(null);
         nonAcademicPanel.setVisible(false);
         mainFrame.add(nonAcademicPanel);
+        //PANEL ADJUSTMENTS AND SETUP ENDS HERE
 
+        //CODE FOR PICTURE THAT ARE INSERTED IN THE GUI
         try {
             BufferedImage logo = ImageIO.read(new File("./ing.png"));
             JLabel logoLabel = new JLabel(new ImageIcon(logo));
@@ -133,7 +146,9 @@ public class INGCollege {
         } catch (Exception ioe) {
             ioe.printStackTrace();
         }
+        //PICTURERS SECTION ENDS HERE
 
+        //FONTS ASSIGNMENT AND ADJUSTMETN
         Font f = new Font("Algerian", Font.BOLD, 18);
         Font f1 = new Font("Algerian", Font.BOLD, 24);
         JLabel ing = new JLabel("ING Course Registration System");
@@ -143,7 +158,7 @@ public class INGCollege {
         ing.setFont(f);
 
         ing.setForeground(Color.BLACK);
-
+        //COMPONENT OF HOME PANEL ADJUSTMENT AND SETUPS 
         poweredby = new JLabel("Powered By: Pukar Gautam");
         poweredby.setBounds(75, 700, 350, 50);
         poweredby.setForeground(Color.BLACK);
@@ -250,7 +265,9 @@ public class INGCollege {
 
                 }
             });
-        // Aademic Course Starts Here
+
+        //COMPONENT OF HOME PANEL ADJUSTMENTS AND SETUPS ENDS HERE
+        // Aademic Course Starts Here WITH PROPER ADJUSTMETNS ... .... :#
 
         academicCourse = new JLabel("Academic Course");
         academicCourse.setBounds(400, 0, 300, 100);
@@ -350,6 +367,8 @@ public class INGCollege {
         Add.setForeground(Color.BLACK);
         Add.setBackground(new Color(240, 255, 240));
         Add.setFocusable(false);
+        //ADDD BUTTON ACTION LISTENER
+        //THIS HELPS TO ADD COURSE IN ACADEMIC COURSE CLASS
         Add.addActionListener(new ActionListener() {
 
                 public void actionPerformed(ActionEvent e) {
@@ -424,6 +443,7 @@ public class INGCollege {
         register.setFocusable(false);
 
         academicPanel.add(register);
+        //REGISTER ACTIN LISTENER USES AND HELPS TO REGISTER IN ACAADEMIC COURS CLASS
         register.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
 
@@ -436,7 +456,7 @@ public class INGCollege {
                     String completion_str = completion.getText();
                     String courseLeader_str = courseTxt.getText();
                     String lecturer_str = lecturer.getText();
-                    for(int i =0; i<academicCourseList.size();i++){
+                    for(int i =0; i<academicCourseList.size();i++){ //LOOPING TILL ARRAYLIST ELEMENTS
 
                         if((academicCourseList.get(i).getCourseId()).equals(id.getText())){
 
@@ -467,6 +487,8 @@ public class INGCollege {
         clear.setFocusable(false);
 
         academicPanel.add(clear);
+        //CLEAR BUTTON CODING STARTS HERE WITH ACTION LISTENER 
+        //HELPS TO CLEAR OUT THE FIELDS.
         clear.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     lecturer.setText("");
@@ -493,17 +515,19 @@ public class INGCollege {
         display.setFocusable(false);
 
         academicPanel.add(display);
+        //DISPLAY IS USED TO DISPLAY ALLL THE ARRAYLIST ELEMENTS 
         display.addActionListener(new ActionListener(){
                 public void actionPerformed(ActionEvent e){
-                    
+
                     JFrame frame = new JFrame("Display");
                     JScrollPane jsp = new JScrollPane();
                     jsp.setBounds(0,0,1400,100);
                     frame.add(jsp);
 
                     JTable table = new JTable();
+                    //HERE THE MAIN HEADING CODE IS ..|>
                     table.setModel(new DefaultTableModel(new Object[][] {}, new String[]{"Course Id", "CourseName","Duration","Level", "Credit", "Number Of Assessments", "Course Leader", "Starting Date", "Completion Date", "Lecturer Name"}));
-                    
+
                     jsp.setViewportView(table);
 
                     DefaultTableModel table_mod = (DefaultTableModel)table.getModel();
@@ -520,14 +544,11 @@ public class INGCollege {
                         String starting_str = ac1.getStartingDate();
                         String completion_str = ac1.getCompletionDate();
                         String lecturer_str = ac1.getLecturerName();
-                        
 
                         Object table_row[] = {cId_str1, courseName_str1, dur_int1, lev_str, cred_str, noc_int, courseTxt_str, starting_str, completion_str, lecturer_str};
                         table_mod.addRow(table_row);
 
-                         
                     }
-                    
                     frame.setResizable(false);
                     frame.setBounds(250,250,1400,300);
                     frame.getContentPane().setBackground(Color.WHITE);
@@ -643,6 +664,7 @@ public class INGCollege {
         Add1.setFocusable(false);
 
         nonAcademicPanel.add(Add1);
+        //ADD COURSE FOR NON ACAEMIC COURSE CLASS
         Add1.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     if(id1.getText().equals("") || cName1.getText().equals("") || dur1.getText().equals("") || pre.getText().equals("")){
@@ -694,7 +716,7 @@ public class INGCollege {
         register1.setForeground(Color.BLACK);
         register1.setBackground(new Color(240, 255, 240));
         register1.setFocusable(false);
-
+        //NON ACADEMIC REGISTER CLASS
         nonAcademicPanel.add(register1);
         register1.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -744,6 +766,7 @@ public class INGCollege {
         clear1.setFocusable(false);
 
         nonAcademicPanel.add(clear1);
+        //CLEAR CODE OF NON ACADEMIC COURSE CLASSS AND SET TO NU LLLLL . IN TEXT FIELD
         clear1.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     id1.setText("");
@@ -770,6 +793,7 @@ public class INGCollege {
         nonAcademicPanel.add(display1);
         display1.addActionListener(new ActionListener(){
                 public void actionPerformed(ActionEvent e){
+                    //TABLE DISPLAY CODE.....?. >>
                     
                     JFrame frame1 = new JFrame("Display");
                     JScrollPane jsp1 = new JScrollPane();
@@ -778,13 +802,13 @@ public class INGCollege {
 
                     JTable table = new JTable();
                     table.setModel(new DefaultTableModel(new Object[][] {}, new String[]{"Course Id","Instructor Name","Duration","Course Name","Exam Date","Course Leader","Prerequisite","Starting Date","Completion Date"}));
-                    
+
                     jsp1.setViewportView(table);
 
                     DefaultTableModel table_mod = (DefaultTableModel)table.getModel();
 
                     for(int i=0; i<nonAcademicCourseList.size(); i++){
-                       NonAcademicCourse nac1 = (NonAcademicCourse)(nonAcademicCourseList.get(i));
+                        NonAcademicCourse nac1 = (NonAcademicCourse)(nonAcademicCourseList.get(i));
                         String id1_str = nac1.getCourseId();
                         String instructor1_str = nac1.getInstructorName();
                         int dur1_int = nac1.getDuration();
@@ -794,14 +818,11 @@ public class INGCollege {
                         String pre_str = nac1.getPrerequisite();
                         String starting1_str = nac1.getStartingDate();
                         String completion1_str = nac1.getCompletionDate();
-                        
 
                         Object table_row[] = {id1_str, instructor1_str, dur1_int, cName1_str, exam1_str, courseTxt_str, pre_str, starting1_str, completion1_str};
                         table_mod.addRow(table_row);
 
-                         
                     }
-                    
                     frame1.setResizable(false);
                     frame1.setBounds(250,250,1400,300);
                     frame1.getContentPane().setBackground(Color.WHITE);
@@ -810,7 +831,7 @@ public class INGCollege {
 
                 }
             });
-            
+
         remove = new JButton("Remove");
         remove.setFont(new Font("Castellar", Font.BOLD, 20));
         remove.setBounds(400, 600, 275, 40);
@@ -818,28 +839,27 @@ public class INGCollege {
         remove.setForeground(Color.BLACK);
         remove.setBackground(new Color(240, 255, 240));
         remove.setFocusable(false);
-
+        //REMOVE BUTTON HANDLING STARTS HERE WITH ACTION LISTENER 
         nonAcademicPanel.add(remove);
         remove.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-                String iDCheck = id1.getText();
-                for(int i =0; i < nonAcademicCourseList.size(); i++){
-                    if(nonAcademicCourseList.get(i).getCourseId().equals(iDCheck)){
-                        NonAcademicCourse nac = (NonAcademicCourse)(nonAcademicCourseList.get(i));
-                        if(nac.getisRemoved()== false){
-                            nonAcademicCourseList.remove(nac);
-                            JOptionPane.showMessageDialog(mainFrame, "The course with Course ID " + iDCheck + " has been successfully removed.");
-                            return;
+                public void actionPerformed(ActionEvent e){
+                    String iDCheck = id1.getText();
+                    for(int i =0; i < nonAcademicCourseList.size(); i++){
+                        if(nonAcademicCourseList.get(i).getCourseId().equals(iDCheck)){
+                            NonAcademicCourse nac = (NonAcademicCourse)(nonAcademicCourseList.get(i));
+                            if(nac.getisRemoved()== false){
+                                nonAcademicCourseList.remove(nac);
+                                JOptionPane.showMessageDialog(mainFrame, "The course with Course ID " + iDCheck + " has been successfully removed.");
+                                return;
+                            }
                         }
                     }
+                    JOptionPane.showMessageDialog(mainFrame,"Enter a valid course ID.","ALERT",JOptionPane.ERROR_MESSAGE);
+                    return;
                 }
-                JOptionPane.showMessageDialog(mainFrame,"Enter a valid course ID.","ALERT",JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-        });
-            
-            
-            
+            });
+
+            //NON ACADEMIC PANEL HANDLING ENDS HERE
         // Frame adjustment are here
         mainFrame.add(fixPanel);
 
