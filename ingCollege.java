@@ -5,82 +5,85 @@ import java.io.File;
 import javax.imageio.ImageIO;
 import java.awt.image.*;
 import java.util.ArrayList;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 import javax.swing.border.*;
 
 public class INGCollege {
+    ArrayList<Course> academicCourseList = new ArrayList<Course>();
+    ArrayList<Course> nonAcademicCourseList = new ArrayList<Course>();
     // Component of home
-    JLabel welcomeText;
-    JLabel poweredby;
+    private JLabel welcomeText;
+    private JLabel poweredby;
 
     // Component of academic Course
-    JLabel academicCourse;
+    private JLabel academicCourse;
     // for adding starts here
-    JLabel courseId;
-    JLabel Duration;
-    JLabel courseName;
-    JLabel level;
-    JLabel credit;
-    JLabel numberOfAssessments;
+    private JLabel courseId;
+    private JLabel Duration;
+    private JLabel courseName;
+    private JLabel level;
+    private JLabel credit;
+    private JLabel numberOfAssessments;
     // for adding stops here
-    JLabel courseLeader;
-    JLabel lecturerName;
-    JLabel startingDate;
-    JLabel completionDate;
+    private JLabel courseLeader;
+    private JLabel lecturerName;
+    private JLabel startingDate;
+    private JLabel completionDate;
     // text field of academic class starts here
-    JTextField id;
-    JTextField lecturer;
-    JTextField dur;
-    JTextField cName;
-    JTextField lev;
-    JTextField cred;
+    private JTextField id;
+    private JTextField lecturer;
+    private JTextField dur;
+    private JTextField cName;
+    private JTextField lev;
+    private JTextField cred;
 
-    JTextField noc;
-    JTextField starting;
-    JTextField completion;
-    JTextField courseTxt;
+    private JTextField noc;
+    private JTextField starting;
+    private JTextField completion;
+    private JTextField courseTxt;
     // buttons of academic course class starts here
-    JButton Add;
-    JButton Register;
-    JButton NonAcademic;
-    JButton register;
-    JButton display;
-    JButton clear;
+    private JButton Add;
+    private JButton Register;
+    private JButton NonAcademic;
+    private JButton register;
+    private JButton display;
+    private  JButton clear;
     // Components of academicCourse class ends here
     // Components of nonacademic course class starts her
 
-    JLabel nonAcademicCourse;
+    private JLabel nonAcademicCourse;
     // add buttton
-    JLabel courseId1;
-    JLabel Duration1;
-    JLabel courseName1;
-    JLabel preRequisite;
+    private JLabel courseId1;
+    private JLabel Duration1;
+    private JLabel courseName1;
+    private JLabel preRequisite;
 
     // regiter button
-    JLabel instructorName1;
-    JLabel startingDate1;
-    JLabel courseLeader1;
-    JLabel completionDate1;
-    JLabel examDate;
+    private JLabel instructorName1;
+    private JLabel startingDate1;
+    private JLabel courseLeader1;
+    private JLabel completionDate1;
+    private JLabel examDate;
 
-    JTextField id1;
-    JTextField instructor1;
-    JTextField dur1;
-    JTextField cName1;
-    JTextField exam1;
-    JTextField courseTxt1;
-    JTextField pre;
-    JTextField starting1;
-    JTextField completion1;
+    private JTextField id1;
+    private JTextField instructor1;
+    private JTextField dur1;
+    private JTextField cName1;
+    private JTextField exam1;
+    private JTextField courseTxt1;
+    private JTextField pre;
+    private JTextField starting1;
+    private JTextField completion1;
 
-    JButton Add1;
-    JButton register1;
-    JButton display1;
-    JButton clear1;
-    
+    private JButton Add1;
+    private JButton register1;
+    private JButton display1;
+    private JButton clear1;
+
     public INGCollege() {
-        ArrayList<Course> academicCourseList = new ArrayList<Course>();
-        ArrayList<Course> nonAcademicCourseList = new ArrayList<Course>();
+        
 
         JFrame mainFrame = new JFrame("Course Registration");
         Image icon = Toolkit.getDefaultToolkit().getImage("./ing.png");
@@ -378,7 +381,6 @@ public class INGCollege {
                         String level_str = lev.getText();
                         String credit_str = cred.getText();
 
-    
                         for(int i=0; i<academicCourseList.size(); i++){
                             if(academicCourseList.get(i).getCourseId().equals(cId)){
                                 JOptionPane.showMessageDialog(mainFrame, "Id" +cId + "has been already added Please enter again");
@@ -391,8 +393,6 @@ public class INGCollege {
                         academicCourseList.add(obj);
                         JOptionPane.showMessageDialog(mainFrame, "Course Id has been added successfully");
 
-                    
-                    
                     }
                 }
             });
@@ -444,6 +444,7 @@ public class INGCollege {
 
                                 ac.register(courseLeader_str, lecturer_str, starting_str, completion_str);
                                 JOptionPane.showMessageDialog(mainFrame, "Course has been successfully registered");
+
                                 return;
                             }else{
                                 JOptionPane.showMessageDialog(mainFrame, "This course is already registered");
@@ -451,9 +452,11 @@ public class INGCollege {
                             }
 
                         }
-                    } 
+                    }
+
                 }
             });
+
         clear = new JButton("Clear");
         clear.setFont(new Font("Castellar", Font.BOLD, 20));
         clear.setBounds(400, 650, 275, 40);
@@ -489,9 +492,50 @@ public class INGCollege {
         display.setFocusable(false);
 
         academicPanel.add(display);
+        display.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                    mainFrame.dispose();
+                    JFrame frame = new JFrame("Display");
+                    JScrollPane jsp = new JScrollPane();
+                    jsp.setBounds(0,0,1400,100);
+                    frame.add(jsp);
 
+                    JTable table = new JTable();
+                    table.setModel(new DefaultTableModel(new Object[][] {}, new String[]{"Course Id", "CourseName","Duration","Level", "Credit", "Number Of Assessments", "Course Leader", "Starting Date", "Completion Date", "Lecturer Name"}));
+                    
+                    jsp.setViewportView(table);
+
+                    DefaultTableModel table_mod = (DefaultTableModel)table.getModel();
+
+                    for(int i=0; i<academicCourseList.size(); i++){
+                        AcademicCourse ac1 = (AcademicCourse)(academicCourseList.get(i));
+                        String cId_str1 = ac1.getCourseId();
+                        String courseName_str1 = ac1.getCourseName();
+                        int dur_int1 = ac1.getDuration();
+                        String lev_str = ac1.getLevel();
+                        String cred_str = ac1.getCredit();
+                        int noc_int = ac1.getNumberOfAssessments();
+                        String courseTxt_str = ac1.getCourseLeader();
+                        String starting_str = ac1.getStartingDate();
+                        String completion_str = ac1.getCompletionDate();
+                        String lecturer_str = ac1.getLecturerName();
+                        
+
+                        Object table_row[] = {cId_str1, courseName_str1, dur_int1, lev_str, cred_str, noc_int, courseTxt_str, starting_str, completion_str, lecturer_str};
+                        table_mod.addRow(table_row);
+
+                         
+                    }
+                    
+                    frame.setResizable(false);
+                    frame.setBounds(250,250,1400,300);
+                    frame.getContentPane().setBackground(Color.WHITE);
+                    frame.setLayout(null);
+                    frame.setVisible(true);
+
+                }
+            });
         // nonAcademicPanel handling starts here:::
-
         nonAcademicCourse = new JLabel("Non Academic Course");
         nonAcademicCourse.setBounds(400, 0, 350, 100);
         nonAcademicCourse.setFont(new Font("ALGERIAN", Font.BOLD, 28));
@@ -499,13 +543,15 @@ public class INGCollege {
         nonAcademicPanel.add(nonAcademicCourse);
 
         courseId1 = new JLabel("Course Id: ");
-        courseId1.setFont(new Font("Arial", Font.PLAIN, 20));
+        courseId1.setFont(new 
+            Font("Arial", Font.PLAIN, 20));
         courseId1.setForeground(Color.WHITE);
         nonAcademicPanel.add(courseId1);
         courseId1.setBounds(15, 100, 125, 100);
 
         Duration1 = new JLabel("Duration: ");
-        Duration1.setFont(new Font("Arial", Font.PLAIN, 20));
+        Duration1.setFont(new 
+            Font("Arial", Font.PLAIN, 20));
         Duration1.setForeground(Color.WHITE);
         nonAcademicPanel.add(Duration1);
         Duration1.setBounds(15,200,125,100);
@@ -529,7 +575,8 @@ public class INGCollege {
         nonAcademicPanel.add(courseLeader1);
 
         preRequisite = new JLabel("PreRequisite: ");
-        preRequisite.setFont(new Font("Arial", Font.PLAIN, 20));
+        preRequisite.setFont(new 
+            Font("Arial", Font.PLAIN, 20));
         preRequisite.setForeground(Color.WHITE);
 
         preRequisite.setBounds(715, 200, 150, 100);
@@ -586,7 +633,8 @@ public class INGCollege {
         nonAcademicPanel.add(completion1);
 
         Add1 = new JButton("Add");
-        Add1.setFont(new Font("Castellar", Font.BOLD, 20));
+        Add1.setFont(new 
+            Font("Castellar", Font.BOLD, 20));
         Add1.setBounds(375, 325, 275, 40);
         Add1.setBorder(emptyBorder);
         Add1.setForeground(Color.BLACK);
@@ -601,7 +649,6 @@ public class INGCollege {
                         JOptionPane.showMessageDialog(mainFrame, "Please fill all the field.");
                         return;
 
-                    
                     }
                     else{
                         int dur_int = 0;
@@ -618,19 +665,17 @@ public class INGCollege {
                         String cName_str = cName1.getText();
                         String pre_str = pre.getText();
 
-                        
                         for(int i = 0; i<nonAcademicCourseList.size(); i++){
                             if(nonAcademicCourseList.get(i).getCourseId().equals(id1_str)){
 
                                 JOptionPane.showMessageDialog(mainFrame, "Course Id " +id1_str+ "has been already added");
                                 return;
-                                
+
                             }
                         }
                         NonAcademicCourse nac = new NonAcademicCourse(id1_str, cName_str, dur_int, pre_str);
                         nonAcademicCourseList.add(nac);
                         JOptionPane.showMessageDialog(mainFrame, "Course Has been successfully added");
-                        
 
                     }
                 }
@@ -653,13 +698,10 @@ public class INGCollege {
         register1.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     if(id1.getText().equals("") || courseTxt1.getText().equals("") || instructor1.getText().equals("") || exam1.getText().equals("") || starting1.getText().equals("") || completion1.getText().equals("")){
-                        
+
                         JOptionPane.showMessageDialog(mainFrame, "Please fill all the fields");
                         return;
-                        
-                    
-                    
-                    
+
                     }
                     else{
                         String id1_str = id1.getText();
@@ -668,9 +710,9 @@ public class INGCollege {
                         String exam_str = exam1.getText();
                         String completion_str = completion1.getText();
                         String start_str = starting1.getText();
-                        
+
                         for(int i = 0; i<nonAcademicCourseList.size(); i++){
-                            
+
                             if(nonAcademicCourseList.get(i).getCourseId().equals(id1_str)){
                                 NonAcademicCourse nacl = (NonAcademicCourse)(nonAcademicCourseList.get(i));
                                 if(!nacl.getisRegistered()){
@@ -679,16 +721,14 @@ public class INGCollege {
                                     return;
                                 }
                                 else{
-                                
-                                    JOptionPane.showMessageDialog(mainFrame, "Non Academic Course is not registered. Please register here!!!");
+
+                                    JOptionPane.showMessageDialog(mainFrame, "Non Academic Course is already registered. Please register here!!!");
                                     return;
                                 }
                             }
-                        
-                        
+
                         }
-                    
-                    
+
                     }
                 }
 
@@ -705,15 +745,15 @@ public class INGCollege {
         nonAcademicPanel.add(clear1);
         clear1.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                id1.setText("");
-                instructor1.setText("");
-                dur1.setText("");
-                cName1.setText("");
-                exam1.setText("");
-                courseTxt1.setText("");
-                pre.setText("");
-                starting1.setText("");
-                completion.setText("");
+                    id1.setText("");
+                    instructor1.setText("");
+                    dur1.setText("");
+                    cName1.setText("");
+                    exam1.setText("");
+                    courseTxt1.setText("");
+                    pre.setText("");
+                    starting1.setText("");
+                    completion.setText("");
                 }
 
             });
@@ -727,7 +767,48 @@ public class INGCollege {
         display1.setFocusable(false);
 
         nonAcademicPanel.add(display1);
+        display1.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                    mainFrame.dispose();
+                    JFrame frame1 = new JFrame("Display");
+                    JScrollPane jsp1 = new JScrollPane();
+                    jsp1.setBounds(0,0,1400,100);
+                    frame1.add(jsp1);
 
+                    JTable table = new JTable();
+                    table.setModel(new DefaultTableModel(new Object[][] {}, new String[]{"Course Id","Instructor Name","Duration","Course Name","Exam Date","Course Leader","Prerequisite","Starting Date","Completion Date"}));
+                    
+                    jsp1.setViewportView(table);
+
+                    DefaultTableModel table_mod = (DefaultTableModel)table.getModel();
+
+                    for(int i=0; i<nonAcademicCourseList.size(); i++){
+                       NonAcademicCourse nac1 = (NonAcademicCourse)(nonAcademicCourseList.get(i));
+                        String id1_str = nac1.getCourseId();
+                        String instructor1_str = nac1.getInstructorName();
+                        int dur1_int = nac1.getDuration();
+                        String cName1_str = nac1.getCourseName();
+                        String exam1_str = nac1.getExamDate();
+                        String courseTxt_str = nac1.getCourseLeader();
+                        String pre_str = nac1.getPrerequisite();
+                        String starting1_str = nac1.getStartingDate();
+                        String completion1_str = nac1.getCompletionDate();
+                        
+
+                        Object table_row[] = {id1_str, instructor1_str, dur1_int, cName1_str, exam1_str, courseTxt_str, pre_str, starting1_str, completion1_str};
+                        table_mod.addRow(table_row);
+
+                         
+                    }
+                    
+                    frame1.setResizable(false);
+                    frame1.setBounds(250,250,1400,300);
+                    frame1.getContentPane().setBackground(Color.WHITE);
+                    frame1.setLayout(null);
+                    frame1.setVisible(true);
+
+                }
+            });
         // Frame adjustment are here
         mainFrame.add(fixPanel);
 
