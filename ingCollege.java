@@ -81,6 +81,7 @@ public class INGCollege {
     private JButton register1;
     private JButton display1;
     private JButton clear1;
+    private JButton remove;
 
     public INGCollege() {
         
@@ -127,7 +128,7 @@ public class INGCollege {
         try {
             BufferedImage homeLogo = ImageIO.read(new File("./logo.png"));
             JLabel homeLogoLabel = new JLabel(new ImageIcon(homeLogo));
-            homeLogoLabel.setBounds(250, 200, 300, 200);
+            homeLogoLabel.setBounds(310, 200, 400, 200);
             homepanel.add(homeLogoLabel);
         } catch (Exception ioe) {
             ioe.printStackTrace();
@@ -150,7 +151,7 @@ public class INGCollege {
 
         welcomeText = new JLabel("Welcome to Course Registration System");
         welcomeText.setBackground(Color.WHITE);
-        welcomeText.setBounds(155, 450, 600, 50);
+        welcomeText.setBounds(220, 500, 700, 50);
         welcomeText.setForeground(Color.WHITE);
         welcomeText.setFont(f1);
         homepanel.add(welcomeText);
@@ -290,7 +291,7 @@ public class INGCollege {
         numberOfAssessments = new JLabel("Number of Assessments: ");
         numberOfAssessments.setFont(new Font("Arial", Font.PLAIN, 20));
         numberOfAssessments.setForeground(Color.WHITE);
-        numberOfAssessments.setBounds(15, 300, 300, 100);
+        numberOfAssessments.setBounds(630,200,235,100);
         academicPanel.add(numberOfAssessments);
 
         lecturerName = new JLabel("Lecturer Name: ");
@@ -340,11 +341,11 @@ public class INGCollege {
 
         noc = new JTextField();
         academicPanel.add(noc);
-        noc.setBounds(250, 335, 125, 25);
+        noc.setBounds(850,235,125,25);
 
         Add = new JButton("Add");
         Add.setFont(new Font("Castellar", Font.BOLD, 20));
-        Add.setBounds(675, 325, 275, 40);
+        Add.setBounds(400,350,275,40);
         Add.setBorder(emptyBorder);
         Add.setForeground(Color.BLACK);
         Add.setBackground(new Color(240, 255, 240));
@@ -494,7 +495,7 @@ public class INGCollege {
         academicPanel.add(display);
         display.addActionListener(new ActionListener(){
                 public void actionPerformed(ActionEvent e){
-                    mainFrame.dispose();
+                    
                     JFrame frame = new JFrame("Display");
                     JScrollPane jsp = new JScrollPane();
                     jsp.setBounds(0,0,1400,100);
@@ -688,7 +689,7 @@ public class INGCollege {
 
         register1 = new JButton("Register");
         register1.setFont(new Font("Castellar", Font.BOLD, 20));
-        register1.setBounds(15, 650, 275, 40);
+        register1.setBounds(15, 675, 275, 40);
         register1.setBorder(emptyBorder);
         register1.setForeground(Color.BLACK);
         register1.setBackground(new Color(240, 255, 240));
@@ -736,7 +737,7 @@ public class INGCollege {
 
         clear1 = new JButton("Clear");
         clear1.setFont(new Font("Castellar", Font.BOLD, 20));
-        clear1.setBounds(400, 650, 275, 40);
+        clear1.setBounds(400, 675, 275, 40);
         clear1.setBorder(emptyBorder);
         clear1.setForeground(Color.BLACK);
         clear1.setBackground(new Color(240, 255, 240));
@@ -760,7 +761,7 @@ public class INGCollege {
 
         display1 = new JButton("Display");
         display1.setFont(new Font("Castellar", Font.BOLD, 20));
-        display1.setBounds(750, 650, 275, 40);
+        display1.setBounds(750, 675, 275, 40);
         display1.setBorder(emptyBorder);
         display1.setForeground(Color.BLACK);
         display1.setBackground(new Color(240, 255, 240));
@@ -769,7 +770,7 @@ public class INGCollege {
         nonAcademicPanel.add(display1);
         display1.addActionListener(new ActionListener(){
                 public void actionPerformed(ActionEvent e){
-                    mainFrame.dispose();
+                    
                     JFrame frame1 = new JFrame("Display");
                     JScrollPane jsp1 = new JScrollPane();
                     jsp1.setBounds(0,0,1400,100);
@@ -809,6 +810,36 @@ public class INGCollege {
 
                 }
             });
+            
+        remove = new JButton("Remove");
+        remove.setFont(new Font("Castellar", Font.BOLD, 20));
+        remove.setBounds(400, 600, 275, 40);
+        remove.setBorder(emptyBorder);
+        remove.setForeground(Color.BLACK);
+        remove.setBackground(new Color(240, 255, 240));
+        remove.setFocusable(false);
+
+        nonAcademicPanel.add(remove);
+        remove.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                String iDCheck = id1.getText();
+                for(int i =0; i < nonAcademicCourseList.size(); i++){
+                    if(nonAcademicCourseList.get(i).getCourseId().equals(iDCheck)){
+                        NonAcademicCourse nac = (NonAcademicCourse)(nonAcademicCourseList.get(i));
+                        if(nac.getisRemoved()== false){
+                            nonAcademicCourseList.remove(nac);
+                            JOptionPane.showMessageDialog(mainFrame, "The course with Course ID " + iDCheck + " has been successfully removed.");
+                            return;
+                        }
+                    }
+                }
+                JOptionPane.showMessageDialog(mainFrame,"Enter a valid course ID.","ALERT",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        });
+            
+            
+            
         // Frame adjustment are here
         mainFrame.add(fixPanel);
 
